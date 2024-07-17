@@ -57,7 +57,14 @@
                             <label for="SignUpEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input type="email" class="form-control" id="SignUpEmail"
-                                    placeholder="Please Enter Your E-mail Id">
+                                    placeholder="Please Enter Your E-mail Id" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="SignUpName" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="SignUpName"
+                                    placeholder="Please Enter Your Name" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -65,9 +72,10 @@
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <input type="password" class="form-control" id="SignUpPassword"
-                                        placeholder="Please Enter Your Password">
+                                        placeholder="Please Enter Your Password" required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="ToggleSignUpPassword" onclick = "toggleSignUpPassword()"><i
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            id="ToggleSignUpPassword" onclick="toggleSignUpPassword()"><i
                                                 class="fa-solid fa-eye"></i></button>
                                     </div>
                                 </div>
@@ -78,28 +86,29 @@
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <input type="password" class="form-control" id="SignUpConfirmPassword"
-                                        placeholder="Please Confirm Your Password">
+                                        placeholder="Please Confirm Your Password" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="button"
-                                            id="ToggleSignUpConfirmPassword" onclick = "toggleSignUpConfirmPassword()"><i class="fa-solid fa-eye"></i></button>
+                                            id="ToggleSignUpConfirmPassword" onclick="toggleSignUpConfirmPassword()"><i
+                                                class="fa-solid fa-eye"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <fieldset class="form-group">
                             <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Role</legend>
+                                <legend class="col-form-label col-sm-2 pt-0">I'm a</legend>
                                 <div class="col-sm-10">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="SignUpTeacherRadio1"
-                                            value="option1">
+                                        <input class="form-check-input" type="radio" name="gridRadios"
+                                            id="SignUpTeacherRadio1" value="option1">
                                         <label class="form-check-label" for="SignUpTeacherRadio1">
                                             Teacher
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="SignUpStudentRadio2"
-                                            value="option2">
+                                        <input class="form-check-input" type="radio" name="gridRadios"
+                                            id="SignUpStudentRadio2" value="option2">
                                         <label class="form-check-label" for="SignUpStudentRadio2">
                                             Student
                                         </label>
@@ -107,9 +116,13 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <div class="form-group row">
-                            <div class="col-sm-10">
+                        <div class="row mt-4 mb-3">
+                            <div class="col-6">
                                 <button type="submit" class="btn btn-primary">Sign Up</button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button class="btn btn-primary" type="button"
+                                    onclick="window.location.href='Index.html';">Back</button>
                             </div>
                         </div>
                     </form>
@@ -117,7 +130,7 @@
             </div>
         </div>
     </div>
-    <script src = "Script.js"></script>
+    <script src="Script.js"></script>
 </body>
 
 </html>

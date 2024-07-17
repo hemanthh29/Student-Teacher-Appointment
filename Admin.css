@@ -1,0 +1,9 @@
+.Background-Container{
+    background-color:#1e3d58;
+    min-height:100vh;
+}
+@media (max-width: 425px) {
+    .Background-Container{
+        min-height:auto;
+    }
+}
