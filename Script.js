@@ -1,5 +1,6 @@
+console.log("Script.js loaded");
 // Purpose: To toggle the password visibility of Password in the Sign-Up page
-const SignUpPasswordInput = document.getElementById('SignUpPassword');
+const SignUpPasswordInput = document.getElementById('SignUpWithPassword');
 const SignUpToggleButton = document.getElementById('ToggleSignUpPassword');
 
 // function to toggle the password visibility
@@ -15,7 +16,7 @@ function toggleSignUpPassword() {
 }
 
 // Purpose: To toggle the password visibility of Confirm Password in the Sign-Up page
-const SignUpConfirmPasswordInput = document.getElementById('SignUpConfirmPassword');
+const SignUpConfirmPasswordInput = document.getElementById('SignUpWithConfirmPassword');
 const SignUpConfirmToggleButton = document.getElementById('ToggleSignUpConfirmPassword');
 
 // function to toggle the password visibility
@@ -27,6 +28,38 @@ function toggleSignUpConfirmPassword() {
     else {
         SignUpConfirmPasswordInput.type = 'password';
         SignUpConfirmToggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+    }
+}
+
+// Purpose: To toggle the password visibility of Password in the Teacher Sign-Up page
+const TeacherSignUpPasswordInput = document.getElementById('SignUpWithTeacherPassword');
+const TeacherSignUpToggleButton = document.getElementById('ToggleSignUpTeacherPassword');
+
+// function to toggle the password visibility
+function toggleSignUpTeacherPassword() {
+    if (TeacherSignUpPasswordInput.type === 'password') {
+        TeacherSignUpPasswordInput.type = 'text';
+        TeacherSignUpToggleButton.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+    }
+    else {
+        TeacherSignUpPasswordInput.type = 'password';
+        TeacherSignUpToggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+    }
+}
+
+// Purpose: To toggle the password visibility of Confirm Password in the Teacher Sign-Up page
+const TeacherSignUpConfirmPasswordInput = document.getElementById('SignUpWithConfirmTeacherPassword');
+const TeacherSignUpConfirmToggleButton = document.getElementById('ToggleSignUpTeacherConfirmPassword');
+
+// function to toggle the password visibility
+function toggleSignUpTeacherConfirmPassword() {
+    if (TeacherSignUpConfirmPasswordInput.type === 'password') {
+        TeacherSignUpConfirmPasswordInput.type = 'text';
+        TeacherSignUpConfirmToggleButton.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+    }
+    else {
+        TeacherSignUpConfirmPasswordInput.type = 'password';
+        TeacherSignUpConfirmToggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
     }
 }
 
@@ -45,44 +78,23 @@ function toggleSignInPassword() {
         SignInToggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
     }
 }
-var Parameter = new URLSearchParams(window.location.search);
-if (Parameter.has('TeacherChecked')) {
-    document.getElementById('SignInTeacherRadio1').checked = true;
-}
-else if (Parameter.has('StudentChecked')) {
-    document.getElementById('SignInStudentRadio2').checked = true;
-}
-else {
-    document.getElementById('SignInTeacherRadio1').disabled = true;
-    document.getElementById('SignInStudentRadio2').disabled = true;
-    document.getElementById('SubHead').textContent = '';
-    // Create Admin radio input
-    var AdminInput = document.createElement('input');
-    AdminInput.setAttribute('class', 'form-check-input');
-    AdminInput.setAttribute('type', 'radio');
-    AdminInput.setAttribute('name', 'gridRadios');
-    AdminInput.setAttribute('id', 'SignInAdminRadio3');
-    AdminInput.setAttribute('value', 'Admin');
-    AdminInput.setAttribute('checked', 'true');
+document.getElementById('DepartmentSelect').addEventListener('change', function() {
+    var department = this.value;
+    var subjectSelect = document.getElementById('SubjectSelect');
+    subjectSelect.innerHTML = '';
 
-    // Create Admin radio label
-    var AdminLabel = document.createElement('label');
-    AdminLabel.setAttribute('class', 'form-check-label');
-    AdminLabel.setAttribute('for', 'SignInAdminRadio3');
-    AdminLabel.textContent = 'Admin';
+    var subjects = {
+        CS: ['Algorithms', 'Data Structures', 'Operating Systems', 'Database Systems'],
+        DSAI: ['Machine Learning', 'Data Mining', 'Neural Networks', 'Big Data'],
+        CIVIL: ['Structural Engineering', 'Geotechnical Engineering', 'Transportation Engineering', 'Water Resources Engineering']
+    };
 
-    // Create container div for the radio button and label
-    var AdminContainer = document.createElement('div');
-    AdminContainer.setAttribute('class', 'form-check');
-    AdminContainer.appendChild(AdminInput);
-    AdminContainer.appendChild(AdminLabel);
-
-    // Append the container div to your desired location in the DOM
-    var FormContainer = document.getElementById('AdminRadio'); // Adjust this to your actual form element or container
-    if (FormContainer) {
-        FormContainer.appendChild(AdminContainer);
-    } else {
-        console.error('Form container element not found.');
+    if(department && subjects[department]) {
+        subjects[department].forEach(function(subject) {
+            var option = document.createElement('option');
+            option.value = subject.replace(/\s+/g, '-');
+            option.textContent = subject;
+            subjectSelect.appendChild(option);
+        });
     }
-
-}
+});
