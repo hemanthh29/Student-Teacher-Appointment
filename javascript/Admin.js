@@ -167,9 +167,24 @@ async function approveStudent(studentId, studentEmail, studentPassword) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, studentEmail, studentPassword);
         const user = userCredential.user;
-        await setCustomUserClaims(user, 'Student');
+
+        // Add student to Firestore
         await setDoc(doc(db, 'students', user.uid), { name: studentEmail.split('@')[0], email: studentEmail, role: 'Student' });
+
+        // Delete from pendingStudents
         await deleteDoc(doc(db, 'pendingStudents', studentId));
+
+        // Set custom claims for the student
+        const idToken = await user.getIdToken();
+        await fetch('https://us-central1-student-teacher-appointment001.cloudfunctions.net/setCustomClaims', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${idToken}`
+            },
+            body: JSON.stringify({ role: 'Student', displayName: user.displayName })
+        });
+
         alert('Student approved successfully!');
     } catch (error) {
         console.error('Error approving student:', error);
@@ -185,21 +200,5 @@ async function denyStudent(studentId) {
     } catch (error) {
         console.error('Error denying student:', error);
         alert('Error denying student. Please try again.');
-    }
-}
-
-async function setCustomUserClaims(user, role) {
-    try {
-        const idTokenResult = await user.getIdToken();
-        await fetch('/setCustomClaims', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${idTokenResult}`
-            },
-            body: JSON.stringify({ role })
-        });
-    } catch (error) {
-        console.error('Error setting custom claims:', error);
     }
 }

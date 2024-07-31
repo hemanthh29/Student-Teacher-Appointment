@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/Teacher.css">
+    <link rel="stylesheet" href="../css/Admin.css">
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js"></script>
@@ -39,18 +40,183 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
+    <script type="module" src="../javascript/Teacher.js"></script>
+    <script type="module" src="../javascript/Authentication.js"></script>
 </head>
 
 <body>
-    <div class="Background-Container">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#455a64">
+        <a class="navbar-brand" href="#">Teacher DashBoard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="Navbar-User mt-3 mt-lg-0">
+                    Signed In As: <span id="UserName"></span><button id="logoutButton" class="Logout-Button ml-3"><i
+                            class="fa-solid fa-right-from-bracket"></i></button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6">
+                <h1 class="Heading-Time mt-5">
+                    Today is: <span id="CurrentStatus"></span>
+                </h1>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-primary Messages-Button" data-toggle="modal" data-target="#exampleModal">View Messages</button>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-0" />
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="DaySelect" class="Heading-Time">Choose Day</label>
+                    <select class="form-control" id="DaySelect">
+                        <option value="">Select Day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                    </select>
+                </div>
+                <h1 class="Heading-Time">Select Time Slot</h1>
+                <div class="table-responsive rounded">
+                    <table class="table shadow table-hover bg-light rounded">
+                        <thead>
+                            <tr class="Table-Headers text-center">
+                                <th scope="col">Slot-1</th>
+                                <th scope="col">Slot-2</th>
+                                <th scope="col">Slot-3</th>
+                                <th scope="col">Slot-4</th>
+                                <th scope="col">Slot-5</th>
+                            </tr>
+                        </thead>
+                        <tbody class="Table-Rows text-center" id="SlotTable">
+                            <tr>
+                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">9:30 to
+                                        10:30</button></td>
+                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">10:30 to
+                                        11:30</button></td>
+                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">11:30 to
+                                        12:30</button></td>
+                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">1:30 to
+                                        2:30</button></td>
+                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">2:30 to
+                                        3:30</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-primary mb-2" id="SubmitSlots">Submit</button>
                 </div>
             </div>
         </div>
     </div>
+    <hr class="mt-0" />
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="Heading-Time">Selected Slots</h1>
+                <div class="table-responsive rounded">
+                    <table class="table shadow table-hover bg-light rounded">
+                        <thead>
+                            <tr class="Table-Headers text-center">
+                                <th scope="col">S.No</th>
+                                <th scope="col">Day</th>
+                                <th scope="col">Slots</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="Table-Rows text-center" id="SelectedSlots">
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-0" />
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="Heading-Time">Pending Appointments</h1>
+                <div class="table-responsive rounded">
+                    <table class="table shadow table-hover bg-light rounded">
+                        <thead>
+                            <tr class="Table-Headers text-center">
+                                <th scope="col">S.No</th>
+                                <th scope="col">Student Name</th>
+                                <th scope="col">Selected Slot</th>
+                                <th scope="col">Approve</th>
+                                <th scope="col">Reject</th>
+                            </tr>
+                        </thead>
+                        <tbody class="Table-Rows text-center" id="PendingAppointments">
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-0" />
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="Heading-Time">My Appointments</h1>
+                <div class="table-responsive rounded">
+                    <table class="table shadow table-hover bg-light rounded">
+                        <thead>
+                            <tr class="Table-Headers text-center">
+                                <th scope="col">S.No</th>
+                                <th scope="col">Student Name</th>
+                                <th scope="col">Selected Slot</th>
+                            </tr>
+                        </thead>
+                        <tbody class="Table-Rows text-center" id="MyAppointments">
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

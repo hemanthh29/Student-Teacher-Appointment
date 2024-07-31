@@ -3,7 +3,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, si
 import { getFirestore, doc, setDoc, collection, getDocs, deleteDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
 import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-functions.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const auth = getAuth(app);
     const db = getFirestore(app);
     const functions = getFunctions(app);
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('logoutButton'); // Add this line
 
     if (signInButton) {
-        signInButton.addEventListener('click', async function(event) {
+        signInButton.addEventListener('click', async function (event) {
             event.preventDefault();
 
             const loginEmail = document.getElementById('SignInEmail').value;
@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const idTokenResult = await user.getIdTokenResult();
                 const role = idTokenResult.claims.role;
 
+                console.log('Fetched role:', role); // Debugging line
+                console.log('Selected role:', selectedRole); // Debugging line
+
                 if (role === selectedRole) {
                     if (role === 'Admin') {
                         window.location.href = '../html/Admin.html';
@@ -54,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (signUpButton) {
-        signUpButton.addEventListener('click', async function(event) {
+        signUpButton.addEventListener('click', async function (event) {
             event.preventDefault();
 
             const signUpName = document.getElementById('SignUpName').value;
@@ -72,6 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectedRole = 'Admin';
             } else if (document.getElementById('SignUpStudentRadio1').checked) {
                 selectedRole = 'Student';
+            }
+            else if (document.getElementById('SignUpTeacherRadio3').checked) {
+                selectedRole = 'Teacher';
             }
 
             if (selectedRole === 'Student') {
@@ -110,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (teacherSignUpButton) {
-        teacherSignUpButton.addEventListener('click', async function(event) {
+        teacherSignUpButton.addEventListener('click', async function (event) {
             event.preventDefault();
 
             const teacherName = document.getElementById('SignUpTeacherName').value;
@@ -149,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (logoutButton) {
-        logoutButton.addEventListener('click', async function() {
+        logoutButton.addEventListener('click', async function () {
             try {
                 await signOut(auth);
                 window.location.href = '../html/Index.html'; // Redirect to Index.html after logout

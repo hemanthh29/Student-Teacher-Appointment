@@ -1,9 +1,8 @@
-.Background-Container{
-    background-color:#1e3d58;
-    min-height:100vh;
+.Heading-Time{
+    font-family:"Bree Serif";
+    font-weight: bold;
+    font-size:16px;
 }
-@media (max-width: 425px) {
-    .Background-Container{
-        min-height:auto;
-    }
+.Messages-Button{
+    margin-top:34px;
 }
