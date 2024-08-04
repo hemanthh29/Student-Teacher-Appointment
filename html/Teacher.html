@@ -67,8 +67,8 @@
                     Today is: <span id="CurrentStatus"></span>
                 </h1>
             </div>
-            <div class="col-6 text-right">
-                <button type="button" class="btn btn-primary Messages-Button" data-toggle="modal" data-target="#exampleModal">View Messages</button>
+            <div class="col-6 text-right mt-4 mt-md-1">
+                <button type="button" class="btn btn-primary btn-sm Messages-Button" data-toggle="modal" data-target="#exampleModal">View Messages</button>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <label for="DaySelect" class="Heading-Time">Choose Day</label>
+                    <label for="DaySelect" class="Main-Heading">Choose Day</label>
                     <select class="form-control" id="DaySelect">
                         <option value="">Select Day</option>
                         <option value="Monday">Monday</option>
@@ -88,7 +88,7 @@
                         <option value="Saturday">Saturday</option>
                     </select>
                 </div>
-                <h1 class="Heading-Time">Select Time Slot</h1>
+                <h1 class="Main-Heading">Select Time Slot</h1>
                 <div class="table-responsive rounded">
                     <table class="table shadow table-hover bg-light rounded">
                         <thead>
@@ -102,22 +102,22 @@
                         </thead>
                         <tbody class="Table-Rows text-center" id="SlotTable">
                             <tr>
-                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">9:30 to
+                                <td><button type="button" class="btn btn-outline-primary btn-sm slot-btn">9:30 to
                                         10:30</button></td>
-                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">10:30 to
+                                <td><button type="button" class="btn btn-outline-primary btn-sm slot-btn">10:30 to
                                         11:30</button></td>
-                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">11:30 to
+                                <td><button type="button" class="btn btn-outline-primary btn-sm slot-btn">11:30 to
                                         12:30</button></td>
-                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">1:30 to
+                                <td><button type="button" class="btn btn-outline-primary btn-sm slot-btn">1:30 to
                                         2:30</button></td>
-                                <td><button type="button" class="btn btn-outline-primary slot-btn" data-day="4">2:30 to
+                                <td><button type="button" class="btn btn-outline-primary btn-sm slot-btn">2:30 to
                                         3:30</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="text-right">
-                    <button class="btn btn-primary mb-2" id="SubmitSlots">Submit</button>
+                    <button class="btn btn-primary btn-sm mb-2" id="SubmitSlots">Submit</button>
                 </div>
             </div>
         </div>
@@ -126,7 +126,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="Heading-Time">Selected Slots</h1>
+                <h1 class="Main-Heading">Selected Slots</h1>
                 <div class="table-responsive rounded">
                     <table class="table shadow table-hover bg-light rounded">
                         <thead>
@@ -151,13 +151,15 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="Heading-Time">Pending Appointments</h1>
+                <h1 class="Main-Heading">Pending Appointments</h1>
                 <div class="table-responsive rounded">
                     <table class="table shadow table-hover bg-light rounded">
                         <thead>
                             <tr class="Table-Headers text-center">
                                 <th scope="col">S.No</th>
                                 <th scope="col">Student Name</th>
+                                <th scope="col">Student Email</th>
+                                <th scope="col">Day</th>
                                 <th scope="col">Selected Slot</th>
                                 <th scope="col">Approve</th>
                                 <th scope="col">Reject</th>
@@ -177,14 +179,17 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="Heading-Time">My Appointments</h1>
+                <h1 class="Main-Heading">My Appointments</h1>
                 <div class="table-responsive rounded">
                     <table class="table shadow table-hover bg-light rounded">
                         <thead>
                             <tr class="Table-Headers text-center">
                                 <th scope="col">S.No</th>
                                 <th scope="col">Student Name</th>
+                                <th scope="col">Student Email</th>
+                                <th scope="col">Day</th>
                                 <th scope="col">Selected Slot</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody class="Table-Rows text-center" id="MyAppointments">
@@ -199,16 +204,16 @@
     </div>  
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog custom-width">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Messages</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
