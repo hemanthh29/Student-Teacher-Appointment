@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             myClasses: myClasses
                         }, { merge: true });
     
-                        alert('Appointment marked as completed successfully.');
+                        alert('Completed Appointment deleted successfully.');
                         updateMyAppointmentsTable(); // Refresh the My Appointments table
                     } else {
                         console.error('No student found with the provided email.');
@@ -410,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             } catch (error) {
                 console.error('Error updating appointments:', error);
-                alert('Error marking appointment as completed.');
+                alert('Error deleting completed appointment.');
             }
         } else {
             console.error('No user is signed in.');

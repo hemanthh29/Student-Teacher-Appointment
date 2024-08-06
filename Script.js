@@ -15,6 +15,22 @@ function toggleSignUpPassword() {
     }
 }
 
+function getQueryParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const role = getQueryParameter('role');
+    if (role) {
+        const radioButtonId = `SignIn${role}Radio${role === 'Teacher' ? '1' : role === 'Student' ? '2' : '3'}`;
+        const radioButton = document.getElementById(radioButtonId);
+        if (radioButton) {
+            radioButton.checked = true;
+        }
+    }
+});
+
 // Purpose: To toggle the password visibility of Confirm Password in the Sign-Up page
 const SignUpConfirmPasswordInput = document.getElementById('SignUpWithConfirmPassword');
 const SignUpConfirmToggleButton = document.getElementById('ToggleSignUpConfirmPassword');
@@ -78,7 +94,7 @@ function toggleSignInPassword() {
         SignInToggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
     }
 }
-document.getElementById('DepartmentSelect').addEventListener('change', function() {
+document.getElementById('DepartmentSelect').addEventListener('change', function () {
     var department = this.value;
     var subjectSelect = document.getElementById('SubjectSelect');
     subjectSelect.innerHTML = '';
@@ -89,8 +105,8 @@ document.getElementById('DepartmentSelect').addEventListener('change', function(
         CIVIL: ['Structural Engineering', 'Geotechnical Engineering', 'Transportation Engineering', 'Water Resources Engineering']
     };
 
-    if(department && subjects[department]) {
-        subjects[department].forEach(function(subject) {
+    if (department && subjects[department]) {
+        subjects[department].forEach(function (subject) {
             var option = document.createElement('option');
             option.value = subject.replace(/\s+/g, '-');
             option.textContent = subject;
@@ -98,3 +114,4 @@ document.getElementById('DepartmentSelect').addEventListener('change', function(
         });
     }
 });
+

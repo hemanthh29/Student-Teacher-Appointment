@@ -116,75 +116,75 @@
         </div>
     </div>
 
-  <!-- Modal(Teachers) -->
-  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog custom-width">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Select Slot</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table-responsive rounded">
-                            <table class="table shadow table-hover bg-light rounded">
-                                <thead>
-                                    <tr class="Table-Headers text-center">
-                                        <th scope="col">Day</th>
-                                        <th scope="col">Slot-1</th>
-                                        <th scope="col">Slot-2</th>
-                                        <th scope="col">Slot-3</th>
-                                        <th scope="col">Slot-4</th>
-                                        <th scope="col">Slot-5</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="Table-Rows text-center" id="Slots">
-                                    <tr>
-        
-                                    </tr>
-                                </tbody>
-                            </table>
+    <!-- Modal(Teachers) -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Select Slot</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive rounded">
+                                    <table class="table shadow table-hover bg-light rounded">
+                                        <thead>
+                                            <tr class="Table-Headers text-center">
+                                                <th scope="col">Day</th>
+                                                <th scope="col">Slot-1</th>
+                                                <th scope="col">Slot-2</th>
+                                                <th scope="col">Slot-3</th>
+                                                <th scope="col">Slot-4</th>
+                                                <th scope="col">Slot-5</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="Table-Rows text-center" id="Slots">
+                                            <tr>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="ConfirmButton">Confirm</button>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id = "ConfirmButton">Confirm</button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Modal(Message) -->
-  <div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Message</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <!-- Modal(Message) -->
+    <div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="chatContainer" class="Background-Chat-Image d-flex flex-column justify-content-end"></div>
+                    <input type="text" class="form-control Messages-Form" id="Message" placeholder="Enter Your Message Here">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="sendButton" class="btn btn-primary">Send</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body p-0">
-          <div class = "Background-Chat-Image">
-            <form>
-                <input type="text" class="Messages-Form" id="Message" placeholder="Enter Your Message Here">
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
     </div>
-  </div>
+    <script src="../Messages.js"></script>
 </body>
 
 </html>

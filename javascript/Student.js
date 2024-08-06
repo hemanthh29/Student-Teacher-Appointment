@@ -1,6 +1,6 @@
 import { app } from './firebase-config.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
-import { getFirestore, doc, getDoc, collection, getDocs, setDoc, updateDoc, arrayUnion } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
+import { getFirestore, doc, getDoc, collection, getDocs, setDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -9,6 +9,7 @@ const db = getFirestore(app);
 var selectedSlots = {};
 var selectedTeacherId = null;
 var studentEmail = null;
+var selectedClassId = null; // Variable to store selected class ID for messaging
 
 onAuthStateChanged(auth, function (user) {
     if (user) {
@@ -186,7 +187,7 @@ async function updateMyClassesTable() {
                         <td>${myClass.email}</td>
                         <td>${myClass.day}</td>
                         <td>${myClass.time}</td>
-                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdrop1">Message</button></td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#staticBackdrop1" data-class-id="123456">Message</button></td>
                     `;
                 });
 
@@ -197,9 +198,7 @@ async function updateMyClassesTable() {
         } catch (error) {
             console.error('Error getting document:', error);
         }
-    } else {
-        console.error('No user is signed in.');
-    }
+    } 
 }
 
 // Call this function once the student view is initialized
@@ -236,7 +235,7 @@ document.getElementById('ConfirmButton').addEventListener('click', async functio
         var userId = user.uid;
         var teacherDocRef = doc(db, 'teachers', selectedTeacherId);
         var teacherDoc = await getDoc(teacherDocRef);
-        var studentDocRef = doc(db, 'students', userId); // Use userId instead of appointment.studentId
+        var studentDocRef = doc(db, 'students', userId);
         var studentDoc = await getDoc(studentDocRef);
 
         if (teacherDoc.exists()) {
@@ -273,3 +272,85 @@ document.getElementById('ConfirmButton').addEventListener('click', async functio
         console.error('Error creating appointment:', error);
     }
 });
+
+// Ensure your modal event listener is correctly set up
+$('#staticBackdrop1').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    selectedClassId = button.data('class-id');
+    console.log('Selected class ID:', selectedClassId); // Debugging line
+});
+
+// Wait until the DOM is fully loaded before executing the script
+document.addEventListener('DOMContentLoaded', function() {
+    var messageInput = document.getElementById('Message');
+    var submitButton = document.getElementById('sendButton');
+
+    // Check if the elements exist
+    if (!messageInput) {
+        console.error('Message input element not found');
+        return;
+    }
+
+    if (!submitButton) {
+        console.error('Submit button element not found');
+        return;
+    }
+
+    submitButton.addEventListener('click', async function() {
+        // Get the raw value from the message input
+        var rawValue = messageInput.value;
+        console.log('Raw message input value:', rawValue); // Debugging line
+
+        // Check if the raw value is empty
+        if (rawValue === '') {
+            // Display an error message to the user
+            alert("Please enter a message.");
+            return;
+        }
+
+        // Trim whitespace from the input value
+        var messageText = rawValue.trim();
+        console.log('Trimmed message text:', messageText); // Debugging line
+
+        // Check if the trimmed message text is empty
+        if (messageText.length === 0) {
+            // Display an error message to the user
+            alert("Please enter a message with actual text.");
+            return;
+        }
+
+        // Proceed with sending the message
+        try {
+            var user = getAuth().currentUser;
+            if (!user) {
+                console.error('No user is signed in.');
+                return;
+            }
+
+            var userId = user.uid;
+            var studentDocRef = doc(db, 'students', userId);
+            var studentDoc = await getDoc(studentDocRef);
+
+            if (studentDoc.exists()) {
+                var studentData = studentDoc.data();
+                var messageRef = doc(db, 'messages', selectedClassId); // Ensure selectedClassId is properly set
+                await setDoc(messageRef, {
+                    sender: studentData.name,
+                    email: studentData.email,
+                    message: messageText,
+                    timestamp: new Date()
+                });
+
+                // Close the modal and reset input
+                $('#staticBackdrop1').modal('hide');
+                messageInput.value = '';
+                selectedClassId = null; // Reset selected class ID
+            } else {
+                console.error('Student document does not exist.');
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+    });
+});
+

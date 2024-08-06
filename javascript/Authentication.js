@@ -6,7 +6,6 @@ import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/
 document.addEventListener('DOMContentLoaded', function () {
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const functions = getFunctions(app);
 
     const signInButton = document.getElementById('SignInButton');
     const signUpButton = document.getElementById('SignUpButton');
@@ -227,19 +226,36 @@ async function setCustomUserClaims(user, role, displayName = null, Email = null,
 }
 
 function handleAuthError(error) {
-    if (error.code === 'auth/user-not-found') {
-        alert('No User Found. Please check your credentials.');
-    } else if (error.code === 'auth/invalid-email') {
-        alert('Invalid Email. Please check your credentials.');
-    } else if (error.code === 'auth/wrong-password') {
-        alert('Incorrect password. Please check your credentials.');
-    } else if (error.code === 'auth/network-request-failed') {
-        alert('Network Error. Please try again later.');
-    } else if (error.code === 'auth/internal-error') {
-        alert('Internal Error. Please try again later.');
-    } else {
-        alert('Error signing in. Please try again later.');
+    let errorMessage = '';
+
+    switch (error.code) {
+        case 'auth/user-not-found':
+            errorMessage = 'No user found. Please check your credentials.';
+            break;
+        case 'auth/email-already-in-use':
+            errorMessage = 'Email already in use. Please check your credentials.';
+            break;
+        case 'auth/invalid-email':
+            errorMessage = 'Invalid email. Please check your credentials.';
+            break;
+        case 'auth/wrong-password':
+            errorMessage = 'Incorrect password. Please check your credentials.';
+            break;
+        case 'auth/network-request-failed':
+            errorMessage = 'Network error. Please try again later.';
+            break;
+        case 'auth/internal-error':
+            errorMessage = 'Internal error. Please try again later.';
+            break;
+        case 'auth/invalid-credential':
+            errorMessage = 'Invalid credentials. Please check your credentials.';
+            break;
+        default:
+            errorMessage = 'Error signing in. Please try again later.';
+            break;
     }
+
+    alert(errorMessage);
 }
 
 export async function deleteTeacher(teacherId) {
@@ -251,5 +267,6 @@ export async function deleteTeacher(teacherId) {
         console.log(result.data);
     } catch (error) {
         console.error('Error deleting teacher:', error);
+        handleAuthError(error);
     }
 }

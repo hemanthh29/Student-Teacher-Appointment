@@ -84,6 +84,7 @@ async function updateTable() {
                     button.addEventListener('click', async () => {
                         const teacherId = button.getAttribute('data-id');
                         await deleteTeacher(teacherId);
+                        alert('Teacher deleted successfully!');
                         await updateTable(); // Refresh the table after deletion
                     });
                 });
@@ -186,6 +187,8 @@ async function approveStudent(studentId, studentEmail, studentPassword) {
         });
 
         alert('Student approved successfully!');
+        await updateStudentsTable();
+        
     } catch (error) {
         console.error('Error approving student:', error);
         alert('Error approving student. Please try again.');
