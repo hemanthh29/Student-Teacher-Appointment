@@ -560,7 +560,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })();
         } else if (!user) {
-            window.location.href = '../html/Index.html';
+            window.location.href = '../Index.html';
         }
     });
 });

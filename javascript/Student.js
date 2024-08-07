@@ -68,7 +68,7 @@ onAuthStateChanged(auth, function (user) {
             }
         })();
     } else {
-        window.location.href = '../html/Index.html';
+        window.location.href = '../Index.html';
     }
 });
 

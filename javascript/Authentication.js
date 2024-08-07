@@ -34,9 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const idTokenResult = await user.getIdTokenResult();
                 const role = idTokenResult.claims.role;
 
-                console.log('Fetched role:', role); // Debugging line
-                console.log('Selected role:', selectedRole); // Debugging line
-
                 if (role === selectedRole) {
                     if (role === 'Admin') {
                         window.location.href = '../html/Admin.html';
@@ -157,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
         logoutButton.addEventListener('click', async function () {
             try {
                 await signOut(auth);
-                window.location.href = '../html/Index.html'; // Redirect to Index.html after logout
+                window.location.href = '../Index.html'; // Redirect to Index.html after logout
             } catch (error) {
                 console.error('Error signing out:', error.code, error.message);
                 // Handle sign out errors if needed

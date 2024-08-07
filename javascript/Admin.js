@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 initialLoad = false; // Reset flag after the first load
             }
         } else if (!user) {
-            window.location.href = '../html/Index.html';
+            window.location.href = '../Index.html';
         }
     });
 });

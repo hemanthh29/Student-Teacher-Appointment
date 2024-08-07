@@ -1,5 +1,3 @@
-// webpack.config.js
-
 const path = require('path');
 
 module.exports = {
@@ -8,7 +6,7 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
-    mode: 'development', // or 'production'
+    mode: 'development',
     devtool: 'eval-source-map',
     module: {
         rules: [
@@ -22,6 +20,19 @@ module.exports = {
                     },
                 },
             },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ],
+            },
         ],
+    },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        port: 3000,
     },
 };
