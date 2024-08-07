@@ -23,11 +23,3 @@
 .form-check-label{
     color:#ffffff;
 }
-@media (max-width: 425px) {
-    .Background-Container{
-        min-height:auto;
-    }
-    .Heading{
-        font-size:22px;
-    }
-}
