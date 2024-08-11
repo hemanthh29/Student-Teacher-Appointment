@@ -70,12 +70,12 @@ Analytics Dashboard: Implement analytics for tracking appointment statistics and
 
 Screenshots:
 
-![Index.html](Screenshots\Index.png)
-![SignUp.html](Screenshots\SignUp.png)
-![SignIn.html](Screenshots\SignIn.png)
-![Student.html](Screenshots\Student.png)
-![Admin.html](Screenshots\Admin.png)
-![Teacher.html](Screenshots\Teacher.png)
+![Index.html](Screenshots/Index.png)
+![SignUp.html](Screenshots/SignUp.png)
+![SignIn.html](Screenshots/SignIn.png)
+![Student.html](Screenshots/Student.png)
+![Admin.html](Screenshots/Admin.png)
+![Teacher.html](Screenshots/Teacher.png)
 
 How to Run:
 
